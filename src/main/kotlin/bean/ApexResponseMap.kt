@@ -1,21 +1,9 @@
 package bean
 
 data class ApexResponseMap(
-    val arenas: Arenas,
-    val arenasRanked: ArenasRanked,
     val battle_royale: BattleRoyale,
-    val control: Control,
-    val ranked: Ranked
-)
-
-data class Arenas(
-    val current: Current,
-    val next: Next
-)
-
-data class ArenasRanked(
-    val current: CurrentX,
-    val next: NextX
+    val ranked: Ranked,
+    val ltm: limited
 )
 
 data class BattleRoyale(
@@ -23,66 +11,15 @@ data class BattleRoyale(
     val next: NextXX
 )
 
-data class Control(
-    val current: CurrentXXX,
-    val next: NextXXX
-)
-
 data class Ranked(
     val current: CurrentXXXX,
     val next: NextXXXX
 )
 
-data class Current(
-    val DurationInMinutes: Int,
-    val DurationInSecs: Int,
-    val asset: String,
-    val code: String,
-    val end: Int,
-    val map: String,
-    val readableDate_end: String,
-    val readableDate_start: String,
-    val remainingMins: Int,
-    val remainingSecs: Int,
-    val remainingTimer: String,
-    val start: Int
-)
+data class limited(
+    val current: CurrentXXXXX,
+    val next: NextXXXXX
 
-data class Next(
-    val DurationInMinutes: Int,
-    val DurationInSecs: Int,
-    val code: String,
-    val end: Int,
-    val map: String,
-    val readableDate_end: String,
-    val readableDate_start: String,
-    val start: Int
-)
-
-data class CurrentX(
-    val DurationInMinutes: Int,
-    val DurationInSecs: Int,
-    val asset: String,
-    val code: String,
-    val end: Int,
-    val map: String,
-    val readableDate_end: String,
-    val readableDate_start: String,
-    val remainingMins: Int,
-    val remainingSecs: Int,
-    val remainingTimer: String,
-    val start: Int
-)
-
-data class NextX(
-    val DurationInMinutes: Int,
-    val DurationInSecs: Int,
-    val code: String,
-    val end: Int,
-    val map: String,
-    val readableDate_end: String,
-    val readableDate_start: String,
-    val start: Int
 )
 
 data class CurrentXX(
@@ -111,38 +48,27 @@ data class NextXX(
     val start: Int
 )
 
-data class CurrentXXX(
-    val DurationInMinutes: Int,
-    val DurationInSecs: Int,
-    val asset: String,
-    val code: String,
-    val end: Int,
-    val map: String,
-    val readableDate_end: String,
-    val readableDate_start: String,
-    val remainingMins: Int,
-    val remainingSecs: Int,
-    val remainingTimer: String,
-    val start: Int
-)
-
-data class NextXXX(
-    val DurationInMinutes: Int,
-    val DurationInSecs: Int,
-    val code: String,
-    val end: Int,
-    val map: String,
-    val readableDate_end: String,
-    val readableDate_start: String,
-    val start: Int
-)
-
 data class CurrentXXXX(
     val code: String,
     val asset: String,
-    val map: String
+    val map: String,
+    val remainingTimer: String
 )
 
 data class NextXXXX(
     val map: String
 )
+
+data class CurrentXXXXX(
+    val map: String,
+    val asset: String,
+    val eventName: String,
+    val remainingTimer: String,
+    val code: String
+)
+
+data class NextXXXXX(
+    val map: String,
+    val eventName: String
+)
+
