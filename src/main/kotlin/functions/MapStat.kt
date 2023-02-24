@@ -41,16 +41,18 @@ fun mapPictureMode(res: ApexResponseMap, image: ApexImage){
     val buffer:BufferedImage = ImageCache("buffer","https://apexlegendsstatus.com/assets/maps/Arena_Encore.png")
     val battleRoyale: BufferedImage = ImageCache("mapbr_"+res.battle_royale.current.code,res.battle_royale.current.asset)
     val ranked:BufferedImage = ImageCache("mapbr_"+res.ranked.current.code,res.ranked.current.asset)
-    val arenas: BufferedImage = ImageCache("mapar_"+res.arenas.current.code,res.arenas.current.asset)
-    val arenasRanked: BufferedImage = ImageCache("mapar_"+res.arenasRanked.current.code,res.arenasRanked.current.asset)
+    //val arenas: BufferedImage = ImageCache("mapar_"+res.arenas.current.code,res.arenas.current.asset)
+    //val arenasRanked: BufferedImage = ImageCache("mapar_"+res.arenasRanked.current.code,res.arenasRanked.current.asset)
+    val ltm: BufferedImage = ImageCache("mapltm_"+res.ltm.current.code,res.ltm.current.asset)
     //val control:BufferedImage = ImageIO.read(URL(res.control.current.asset))
 
     //渲染背景
-    val background = mergeImage(false,buffer,buffer,buffer,buffer)
+    val background = mergeImage(false,buffer,buffer,buffer)
     var img = drawImageToImage(background, battleRoyale,1920,600,0,0)
     img = drawImageToImage(img, ranked,1920,600,0,600)
-    img = drawImageToImage(img,arenas,1920,600,0,1200)
-    img = drawImageToImage(img,arenasRanked,1920,600,0,1800)
+    img = drawImageToImage(img, ltm,1920,600,0,1200)
+    //img = drawImageToImage(img,arenas,1920,600,0,1200)
+    //img = drawImageToImage(img,arenasRanked,1920,600,0,1800)
 
     //匹配
     img = drawTextToImage(img,"匹配",80,200,150, Color.white)
@@ -61,17 +63,13 @@ fun mapPictureMode(res: ApexResponseMap, image: ApexImage){
     img = drawTextToImage(img,"排位",80,800,150, Color.white)
     img = drawTextToImage(img, res.ranked.current.map,80,950,150, Color.white)
     img = drawTextToImage(img,"下一轮换："+ res.ranked.next.map,90,1050,35, Color.white)
-    //竞技场
-    img = drawTextToImage(img,"竞技场",80,1400,150, Color.white)
-    img = drawTextToImage(img, res.arenas.current.map,80,1550,150, Color.white)
-    img = drawTextToImage(img,"剩余时间："+ res.arenas.current.remainingTimer,90,1650,35, Color.white)
-    img = drawTextToImage(img,"下一轮换："+ res.arenas.next.map,90,1700,35, Color.white)
-    //排位竞技场
-    img = drawTextToImage(img,"排位竞技场",80,2000,150, Color.white)
-    img = drawTextToImage(img, res.arenasRanked.current.map,80,2150,150, Color.white)
-    img = drawTextToImage(img,"剩余时间："+ res.arenasRanked.current.remainingTimer,90,2250,35, Color.white)
-    img = drawTextToImage(img,"下一轮换："+ res.arenasRanked.next.map,90,2300,35, Color.white)
 
+    //limited Mode
+    img = drawTextToImage(img,"街机模式",80,1400,150,Color.white)
+    img = drawTextToImage(img, res.ltm.current.map,80,1550,150,Color.white)
+    img = drawTextToImage(img,"剩余时间："+ res.ltm.current.remainingTimer,90,1700,35,Color.white)
+    img = drawTextToImage(img,"下一模式："+ res.ltm.next.map + res.ltm.next.eventName,90,1750,35,Color.white)
+    
     image.save(img,false)
 }
 
@@ -81,16 +79,8 @@ fun mapTextMode(res:ApexResponseMap):String{
     map += "当前地图:" + res.battle_royale.current.map + "\n"
     map += "剩余时间:" + res.battle_royale.current.remainingTimer + "\n"
     map += "下一轮换:" + res.battle_royale.next.map + "\n"
-    map += "---------竞技场-----------" + "\n"
-    map += "当前地图:" + res.arenas.current.map + "\n"
-    map += "剩余时间:" + res.arenas.current.remainingTimer + "\n"
-    map += "下一轮换:" + res.arenas.next.map + "\n"
     map += "----------排位------------" + "\n"
     map += "当前地图:" + res.ranked.current.map + "\n"
     map += "下一轮换:" + res.ranked.next.map + "\n"
-    map += "--------排位竞技场--------" + "\n"
-    map += "当前地图:" + res.arenasRanked.current.map + "\n"
-    map += "剩余时间:" + res.arenasRanked.current.remainingTimer + "\n"
-    map += "下一轮换:" + res.arenasRanked.next.map
     return map
 }
